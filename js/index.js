@@ -171,7 +171,8 @@ $(document).ready(function () {
 
   }
   get_current_dfdata_stream();
-
+  // 5.7 获取具体某天的GPS信息
+  // 5.10 获取车辆某个时间段的体检报告
   $.ajax({
     url: 'http://open.api.dbscar.com/?action=data_stream.get_current_dfdata_stream&develop_id=1000&deviceuid=D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0&time=1404296554&sign=14666ef0835a0f1ea4ab1f727d731aa4',
     success: function (result) {
