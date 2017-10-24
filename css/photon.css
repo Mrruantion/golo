@@ -2352,3 +2352,20 @@ td:last-child {
   flex: none;
   padding: 3px 10px;
 }
+
+.select-date {
+  min-width: 420px;
+  text-align: center;
+  margin-top: 20px;
+}
+.submit-button {
+  margin-top: 30%;
+}
+.submit-button button {
+  border-radius: 2px;
+  border: 0;
+  background: #fece72;
+  width: 80px;
+  color: #fff;
+  height: 30px;
+}

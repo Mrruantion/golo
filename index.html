@@ -1,58 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>golo</title>
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="./css/photon.css">
+<head>
+  <title>golo</title>
 
-    <!-- Javascript -->
-    <script src="js/menu.js" charset="utf-8"></script>
-    <script src="js/index.js" charset="utf-8"></script>
-  </head>
-  <body>
-    <div class="window">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/photon.css">
 
-      <!-- .toolbar-header sits at the top of your app -->
-      <header class="toolbar toolbar-header">
-        <h1 class="title">golo</h1>
-      </header>
+  <!-- Javascript -->
+  <script src="js/menu.js" charset="utf-8"></script>
+  <script src="js/index.js" charset="utf-8"></script>
+  <script src="js/connet.js" charset="utf-8"></script>
+</head>
 
-      <!-- Your app's content goes inside .window-content -->
-      <div class="window-content">
-        <div class="pane-group">
-          <div class="pane pane-sm sidebar">
-            <nav class="nav-group">
-              <h5 class="nav-group-title">Favorites</h5>
-              <span class="nav-group-item active">
-                <span class="icon icon-light-up"></span>
-                Photon
+<body>
+  <div class="window">
+
+    <!-- .toolbar-header sits at the top of your app -->
+    <header class="toolbar toolbar-header">
+      <h1 class="title">golo</h1>
+    </header>
+
+    <!-- Your app's content goes inside .window-content -->
+    <div class="window-content">
+      <div class="pane-group">
+        <div class="pane pane-sm sidebar">
+          <nav class="nav-group">
+            <h5 class="nav-group-title">操作</h5>
+            <span class="nav-group-item active">
+              <span class="icon"></span>
+                更新数据
               </span>
-            </nav>
-          </div>
-
-          <div class="pane">
-            <table class="table-striped">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Kind</th>
-                  <th>Date Modified</th>
-                  <th>Author</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>bars.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          </nav>
+        </div>
+        <div class="pane">
+          <div class="select-date">
+            起始时间：<input type='date'/>
+            结束时间：<input type="date"/>
+         </div>
+         <div class="select-date submit-button">
+           <button>确定</button>
+         </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
