@@ -1,17 +1,20 @@
 var $ = require('jquery');
 var md5 = require('md5')
 // import connection from './connet.js';
+var mySql = require('./js/connet')
 // var connection = require('connection')
+console.log(mySql);
+
 
 $(document).ready(function () {
   function time() {
     return 0 | new Date().getTime() / 1000
   }
   // console.log(connection,'connection');
-  connection.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA="carmanage" AND TABLE_NAME="report"',function(err,res,fie){
-      if(err) throw err;
-      console.log('result1:',res[0])
-  })
+  // connection.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA="carmanage" AND TABLE_NAME="report"',function(err,res,fie){
+  //     if(err) throw err;
+  //     console.log('result1:',res[0])
+  // })
   //1获取根据设备序列号获取设备信息
   function get_devices_info() {
     /**
@@ -74,11 +77,11 @@ $(document).ready(function () {
      * sign          md5签名
      */
     let opt = {
-      date: '2015-12-02',
+      date: '2015-06-30',
       develop_id: 1000,
       deviceuid: 'D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0',
       endtime: '20:40:44',
-      starttime: '09:34:44',
+      starttime: '00:34:44',
       time: time()
     }
     let url1 = 'action=data_develop. get_dfdata_stream_info'
@@ -86,8 +89,8 @@ $(document).ready(function () {
   }
   get_dfdata_stream_info()
 
-  //获取具体某天的故障码信息
-  function get_current_dfdata_stream() {
+  //5获取具体某天的故障码信息
+  function get_trouble_code_info() {
     /**
      * develop_id    开发者id(1000)
      * deviceuid     设备uid(D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0) 根据get_devices_info获得
@@ -95,24 +98,27 @@ $(document).ready(function () {
      * sign          md5签名
      */
     let opt = {
+      date:'2015-06-30',
       develop_id: 1000,
       deviceuid: 'D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0',
+      endtime:'20:19:46',
+      starttime:'00:40:41',
       time: time()
     }
-    let url1 = 'action=data_stream.get_current_dfdata_stream'
+    let url1 = 'action=data_develop.get_trouble_code_info'
     ajax(opt,url1,5);
 
   }
-  get_current_dfdata_stream();
+  get_trouble_code_info();
 
   // 5.7 获取具体某天的GPS信息
   function get_gps_info() {
     let obj = {
-      date: '2015-12-02',
+      date: '2015-06-30',
       develop_id: 1000,
       deviceuid: 'D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0',
-      endtime: '18:30:12',
-      starttime: '09:53:46',
+      endtime: '24:30:12',
+      starttime: '00:53:46',
       time: time(),
     }
     let url1 = 'action=data_develop.get_gps_info'
@@ -125,18 +131,19 @@ $(document).ready(function () {
   function get_medical_reports_by_page(){
     let opt = {
       develop_id:1000,
-      devicesn: 971190000018,
-      start_date:'2014-07-14',
-      end_date:'2014-07-16',
+      devicesn: '971190000018',
+      start_date:'2015-06-14',
+      end_date:'2017-07-16',
       pagesize:10,
-      targetpage:1,
       time:time(),
-      type:1
     }
     let url1 = 'action=vehicle_medical_report_service.get_medical_reports_by_page';
     ajax(opt,url1,10)
   }
   get_medical_reports_by_page()
+
+
+
   function ajax(opt, url1,type) {
     let url = "http://open.api.dbscar.com/?"
     for (var k in opt) {
@@ -146,9 +153,6 @@ $(document).ready(function () {
     url1 += 'a8f93c4e9f2ab7dcbef012cd8b5147'
     let sign = md5(url1);
     url += '&sign=' + sign;
-    // console.log(url1)
-    // console.log(url)
-    // console.log(md5(url1))
     $.ajax({
       url: url,
       success: function (result) {
