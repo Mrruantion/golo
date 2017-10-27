@@ -10,6 +10,7 @@ $(document).ready(function () {
   function time() {
     return 0 | new Date().getTime() / 1000
   }
+  let i = 0;
   // console.log(connection,'connection');
   // connection.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA="carmanage" AND TABLE_NAME="report"',function(err,res,fie){
   //     if(err) throw err;
@@ -34,8 +35,14 @@ $(document).ready(function () {
       devicetype: 'golo3CU',
       time: time()
     }
-    let url1 = 'action=data_develop.get_devices_info'
-    ajax(opt,url1,1)
+    let op = {
+      table: 'devices_info',
+      type: 1,
+      url: 'action=data_develop.get_devices_info'
+    }
+    // let url1 = 'action=data_develop.get_devices_info'
+    // ajax(opt,url1, op)
+    ajax(opt, op)
   }
   get_devices_info();
 
@@ -51,17 +58,25 @@ $(document).ready(function () {
      * time          十位的时间戳
      * sign          md5签名
      */
+    // let i = 0;
+    i++;
     let opt = {
       develop_id: 1000,
       deviceuid: 'D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0',
       endtime: '2015-07-20 16:58:31',
-      pagesize: '10',
+      pagesize: 10,
       starttime: '2015-06-20 14:44:16',
-      targetpage: 1,
+      targetpage: i,
       time: time()
     }
-    let url1 = 'action=data_develop.get_trip_record_by_page'
-    ajax(opt,url1,2)
+    let op = {
+      table: 'trip_info',
+      type: 2,
+      url: 'action=data_develop.get_trip_record_by_page'
+    }
+    // let url1 = 'action=data_develop.get_trip_record_by_page'
+    // ajax(opt, url1, op)
+    ajax(opt, op)
 
   }
   get_trip_record_by_page()
@@ -77,15 +92,21 @@ $(document).ready(function () {
      * sign          md5签名
      */
     let opt = {
-      date: '2015-06-30',
+      date: '2016-03-04',
       develop_id: 1000,
       deviceuid: 'D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0',
       endtime: '20:40:44',
-      starttime: '00:34:44',
+      starttime: '00:00:44',
       time: time()
     }
-    let url1 = 'action=data_develop. get_dfdata_stream_info'
-    ajax(opt,url1,3)
+    let op = {
+      table: 'stream_info',
+      type: 3,
+      url: 'action=data_develop.get_dfdata_stream_info'
+    }
+    // let url1 = 'action=data_develop.get_dfdata_stream_info'
+    // ajax(opt, url1, op)
+    ajax(opt, op)
   }
   get_dfdata_stream_info()
 
@@ -98,22 +119,27 @@ $(document).ready(function () {
      * sign          md5签名
      */
     let opt = {
-      date:'2015-06-30',
+      date: '2015-06-30',
       develop_id: 1000,
       deviceuid: 'D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0',
-      endtime:'20:19:46',
-      starttime:'00:40:41',
+      endtime: '20:19:46',
+      starttime: '00:40:41',
       time: time()
     }
-    let url1 = 'action=data_develop.get_trouble_code_info'
-    ajax(opt,url1,5);
-
+    // let url1 = 'action=data_develop.get_trouble_code_info'
+    let op = {
+      table: 'trouble_code_info',
+      type: 5,
+      url: 'action=data_develop.get_trouble_code_info'
+    }
+    // ajax(opt, url1, op);
+    ajax(opt, op)
   }
   get_trouble_code_info();
 
   // 5.7 获取具体某天的GPS信息
   function get_gps_info() {
-    let obj = {
+    let opt = {
       date: '2015-06-30',
       develop_id: 1000,
       deviceuid: 'D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0',
@@ -121,52 +147,131 @@ $(document).ready(function () {
       starttime: '00:53:46',
       time: time(),
     }
-    let url1 = 'action=data_develop.get_gps_info'
-    ajax(obj,url1,7)
+    // let url1 = 'action=data_develop.get_gps_info'
+    let op = {
+      table: 'gps_info',
+      type: 7,
+      url: 'action=data_develop.get_gps_info'
+    }
+    // ajax(obj, url1, op)
+    ajax(opt, op)
   }
   get_gps_info()
 
   // 5.10 获取车辆某个时间段的体检报告
 
-  function get_medical_reports_by_page(){
+  function get_medical_reports_by_page() {
+    // let opt = {
+    //   develop_id:1000,
+    //   devicesn: '971190000018',
+    //   start_date:'2015-06-14',
+    //   end_date:'2017-07-16',
+    //   pagesize:10,
+    //   time:time(),
+    // }
+    // let i = 0;
+    // i++;
     let opt = {
-      develop_id:1000,
-      devicesn: '971190000018',
-      start_date:'2015-06-14',
-      end_date:'2017-07-16',
-      pagesize:10,
-      time:time(),
+      develop_id: 1000,
+      devicesn: 971190000018,
+      end_date: '2017-07-16',
+      pagesize: 10,
+      start_date: '2015-06-14',
+      targetpage: 1,
+      time: time(),
     }
-    let url1 = 'action=vehicle_medical_report_service.get_medical_reports_by_page';
-    ajax(opt,url1,10)
+    // let url1 = 'action=vehicle_medical_report_service.get_medical_reports_by_page';
+    let op = {
+      table: 'reports_info',
+      type: 10,
+      url: 'action=vehicle_medical_report_service.get_medical_reports_by_page'
+    }
+    ajax(opt, op)
   }
   get_medical_reports_by_page()
+  // endtime=2015-07-20 16:58:31&pagesize=10&starttime=2015-06-20 14:44:16&targetpage=1&time=1404296554
 
 
-
-  function ajax(opt, url1,type) {
+  function ajax(opt, op) {
     let url = "http://open.api.dbscar.com/?"
     for (var k in opt) {
-      url1 += '&' + k + '=' + opt[k]
+      op.url += '&' + k + '=' + opt[k]
     }
-    url += url1;
-    url1 += 'a8f93c4e9f2ab7dcbef012cd8b5147'
-    let sign = md5(url1);
+    url += op.url;
+    op.url += 'a8f93c4e9f2ab7dcbef012cd8b5147'
+    let sign = md5(op.url);
     url += '&sign=' + sign;
     $.ajax({
       url: url,
-      success: function (result) {
-        console.log(JSON.parse(result),type)
+      success: function (res) {
+        // console.log(JSON.parse(res), op.type)
+        let result = JSON.parse(res)
+        if (result.code == 0) {
+          aggr(result, op)
+        }
       }
     })
   }
-  
-  
+
+
+  function aggr(datas, op) {
+    console.log(datas,op.type);
+    // console.log(op)
+    if (op.type == 2) {
+      // get_trip_record_by_page()
+      datas.data.count > 0 ? get_trip_record_by_page() : i = 0;
+      datas.data.count > 0 ? op.data = datas.data.list : op.data = [];
+      inserData(op)
+      // console.log(op)
+    }
+
+  }
+
+  // function inserTirp(datas) {
+  //   let data = [];
+  //   let flat = true;
+  //   datas.data.count > 0 ? data = datas.data.list : flat = false;
+  //   // console.log(data)
+  //   inserData(data)
+  //   let table = 'trip_info'
+  // }
+
+  function inserData(op) {
+    let value = [];
+    let obj = [];
+    if (op.data.length) {
+      op.data.forEach(function (ele) {
+        let list = [];
+        let list1 = [];
+        for (var o in ele) {
+          list1.push(o);
+          list.push(ele[o])
+        }
+        obj = list1
+        value.push(list)
+      }, this);
+      let str = "";
+      obj.forEach(ele => {
+        str += "`" + ele + "`" + ','
+      })
+      str = str.slice(0, -1)
+      let strings = "INSERT ignore INTO " + op.table + "(" + str + ") VALUES ?"
+      console.log(strings)
+      console.log(value, obj)
+
+      let client = mySql.connectServer();
+      mySql.dbControl(client, strings, [value], function (err, rows, fields) {
+        console.log(err, rows, fields)
+
+      })
+    }
+  }
+
   // $.ajax({
   //   url: 'http://open.api.dbscar.com/?action=data_stream.get_current_dfdata_stream&develop_id=1000&deviceuid=D4BF37A7-6E49-41D4-16F6-E5A5E3D34BB0&time=1404296554&sign=14666ef0835a0f1ea4ab1f727d731aa4',
   //   success: function (result) {
   //     console.log(JSON.parse(result))
   //   }
   // })
-  
+
 });

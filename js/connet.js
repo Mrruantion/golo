@@ -1,12 +1,12 @@
 var mysql = require('mysql');
-// var connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: '123456',
-//   database: 'carmanage'
-// });
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '123456',
+  database: 'carmanage'
+});
 
-// connection.connect();
+connection.connect();
 
 
 function connectServer() {
@@ -19,9 +19,9 @@ function connectServer() {
   return client;
 }
 
-function dbControl(client,target,callback){
+function dbControl(client,target,val,callback){
   client.connect();
-  client.query(target,function(err,results){
+  client.query(target,val,function(err,results){
     if(err) throw err;
     callback(results)
   });
@@ -45,3 +45,16 @@ exports.dbControl = dbControl;
 // $(document).ready(function () {
 
 // })
+
+
+var values = [
+  ["index1","www.alibaba.com",1,0]
+];
+var sql = "INSERT ignore INTO url(`from`,`to`,`status`, `is_new`) VALUES ?";
+connection.query(sql, [values], function (err, rows, fields) {
+  if(err){
+              console.log('INSERT ERROR - ', err.message);
+              return;
+          }
+          console.log("INSERT SUCCESS");
+});
