@@ -48,7 +48,7 @@ exports.dbControl = dbControl;
 
 
 var values = [
-  ["index1","www.alibaba.com",1,0]
+  ["index1","www.alibaba.com",1,undefined]
 ];
 var sql = "INSERT ignore INTO url(`from`,`to`,`status`, `is_new`) VALUES ?";
 connection.query(sql, [values], function (err, rows, fields) {
