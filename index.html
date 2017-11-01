@@ -6,10 +6,20 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="./css/photon.css">
-
-  <!-- Javascript -->
-  <script src="js/menu.js" charset="utf-8"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="js/index.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./js/assets/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="./js/assets/bootstrap/css/bootstrap.min.css">
+  <script type="text/javascript" src="./js/assets/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./js/assets/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+  <script type="text/javascript" src="./js/assets/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+  <script type="text/javascript" src="./js/assets/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+  <!-- <script type="text/javascript" src="./js/assets/jquery-3.2.1.min.js"></script> -->
+
+  <script src="js/menu.js" charset="utf-8"></script>
+
   <!-- <script src="js/connet.js" charset="utf-8"></script> -->
 </head>
 
@@ -29,23 +39,75 @@
             <h5 class="nav-group-title">操作</h5>
             <span class="nav-group-item active">
               <span class="icon"></span>
-                更新数据
-              </span>
+              更新数据
+            </span>
           </nav>
         </div>
         <div class="pane">
           <div class="select-date">
-            起始时间：<input type='date'/>
-            结束时间：<input type="date"/>
-         </div>
-         <div class="select-date submit-button">
-           <button id="into">导出</button>
-           <button id="put">导入</button>
-         </div>
+            <div style="display:inline-block">
+              <input id="start_time" type="text" class="datepicker" placeholder="请选择日期" value="2017-10-29" style="width:120px" />
+              <span>-</span>
+              <input id="end_time" type="text" class="datepicker" placeholder="请选择日期" value="2017-10-29" style="width:120px" />
+            </div>
+          </div>
+          <div class="select-date submit-button">
+            <button id="into">导出</button>
+            <button id="put">导入</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </body>
+<script>
+  $(function () {
+    function getNowDate() {
+      let d = new Date();
+      let year = d.getFullYear();
+      let mon = d.getMonth() + 1;
+      let day = d.getDate();
+      let s = year + "-" + (mon < 10 ? ('0' + mon) : mon) + "-" + (day < 10 ? ('0' + day) : day);
+      return s;
+    }
+    var end_time = getNowDate();
+    $('#end_time').val(end_time)
+
+
+    function getBeforeDate(n) {
+      var n = n;
+      var d = new Date();
+      var year = d.getFullYear();
+      var mon = d.getMonth() + 1;
+      var day = d.getDate();
+      if (day <= n) {
+        if (mon > 1) {
+          mon = mon - 1;
+        }
+        else {
+          year = year - 1;
+          mon = 12;
+        }
+      }
+      d.setDate(d.getDate() - n);
+      year = d.getFullYear();
+      mon = d.getMonth() + 1;
+      day = d.getDate();
+      s = year + "-" + (mon < 10 ? ('0' + mon) : mon) + "-" + (day < 10 ? ('0' + day) : day);
+      return s;
+    }
+    // console.log(getBeforeDate(7))
+    var start_time = getBeforeDate(0);
+    $('#start_time').val(start_time);
+    // $('#end_time').val(end_time);
+
+    $(".datepicker").datetimepicker({
+      language: "zh-CN",
+      autoclose: true,//选中之后自动隐藏日期选择框
+      format: "yyyy-mm-dd",//日期格式
+      minView: 2
+    });
+  });
+</script>
 
 </html>

@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var jQuery = $;
 var md5 = require('md5')
 // import connection from './connet.js';
 var mySql = require('./js/connet');
@@ -348,7 +349,7 @@ $(document).ready(function () {
         str += "`" + ele + "`" + ','
       })
       str = str.slice(0, -1)
-      let strings = "INSERT ignore INTO " + op.table + "(" + str + ") VALUES ?"
+      let strings = "INSERT INTO " + op.table + "(" + str + ") VALUES ?"
       console.log(strings)
       console.log(value, obj)
       // opt.sqlArr.length == opt.count ? opt.sql = strings : null;

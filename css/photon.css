@@ -2369,3 +2369,11 @@ td:last-child {
   color: #fff;
   height: 30px;
 }
+.datepicker {
+  width: 120px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  text-align: center
+}
